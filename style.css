@@ -379,7 +379,11 @@ a.back-link:focus-visible {
 }
 
 .requirement-grid {
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.requirement-grid > .slot {
+  min-width: 0;
 }
 
 .slot-wide {
@@ -400,6 +404,111 @@ a.back-link:focus-visible {
 
 .slot-part + .slot-part {
   border-left: 1px solid var(--line);
+}
+
+.timeline-scroll {
+  overflow-x: auto;
+  margin-top: 8px;
+  padding: 6px 0 4px;
+}
+
+.timeline {
+  position: relative;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  min-width: 640px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tl-item:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  top: 9px;
+  left: 50%;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, rgba(196, 165, 116, 0.55), var(--gold));
+  transform-origin: left center;
+  animation: tl-draw 0.35s ease-out both;
+  animation-delay: calc(0.3s + var(--i) * 0.1s);
+}
+
+.tl-item {
+  position: relative;
+  padding-top: 34px;
+  text-align: center;
+}
+
+.tl-item::after {
+  content: "";
+  position: absolute;
+  top: 11px;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--bg-lift);
+  box-shadow: 0 0 0 4px var(--gold-dim);
+  translate: -50% -50%;
+  animation: tl-pop 0.4s ease both;
+  animation-delay: calc(0.4s + var(--i) * 0.1s);
+}
+
+.tl-item.is-key::after {
+  background: var(--ink);
+  box-shadow: 0 0 0 4px var(--gold), 0 0 14px rgba(196, 165, 116, 0.55);
+}
+
+.tl-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  padding: 0 4px;
+  word-break: keep-all;
+  animation: arrive 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(0.5s + var(--i) * 0.1s);
+}
+
+.tl-body span {
+  order: 1;
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.tl-body strong {
+  order: 2;
+  color: var(--gold);
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.tl-body em {
+  order: 3;
+  color: var(--muted);
+  font-size: 12px;
+  font-style: normal;
+}
+
+.tl-item:not(.is-key) .tl-body span {
+  color: #d8d3cb;
+  font-weight: 500;
+}
+
+@keyframes tl-draw {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@keyframes tl-pop {
+  from { opacity: 0; scale: 0.3; }
+  to { opacity: 1; scale: 1; }
 }
 
 .detail-grid {
@@ -454,6 +563,12 @@ a.back-link:focus-visible {
   font-size: 17px;
   font-weight: 700;
   letter-spacing: -0.02em;
+}
+
+.slot-note {
+  margin-left: 10px;
+  color: var(--muted);
+  font-size: 12.5px;
 }
 
 .slot p {
@@ -662,7 +777,10 @@ a.student-card:hover span {
   .requirement-grid > .slot,
   .student-grid > .student-card,
   .detail-grid > .slot,
-  .story > .section {
+  .story > .section,
+  .tl-item::before,
+  .tl-item::after,
+  .tl-body {
     animation: none;
   }
 }
