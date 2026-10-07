@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>부산자동차마이스터고등학교 대/공기업반 자료</title>
+  <meta name="version" content="1">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="corner-link" href="https://jonggeon94.github.io/Interview/" target="_blank" rel="noopener noreferrer">면접 자료</a>
+  <main class="page">
+    <header class="hero">
+      <div class="logo-wrap" id="logoWrap">
+        <img id="schoolLogo" src="logo.png" alt="부산자동차마이스터고등학교 로고">
+        <div class="logo-fallback">학교 로고</div>
+      </div>
+      <h1>대/공기업반 자료</h1>
+      <div class="gold-line"></div>
+      <p class="subtitle">기업체를 선택하면 해당 자료 페이지로 이동합니다.</p>
+    </header>
+
+    <nav class="tabs" aria-label="기업체">
+      <a class="tab" href="KAI.html">
+        <span class="tab-name">한국항공우주산업(KAI)</span>
+        <span class="tab-logo"><img src="logos/kai.png" alt=""></span>
+      </a>
+      <span class="tab tab-soon">
+        <span class="tab-name">기업체 2</span>
+        <span class="tab-logo tab-logo-empty"></span>
+      </span>
+      <span class="tab tab-soon">
+        <span class="tab-name">기업체 3</span>
+        <span class="tab-logo tab-logo-empty"></span>
+      </span>
+      <span class="tab tab-soon">
+        <span class="tab-name">기업체 4</span>
+        <span class="tab-logo tab-logo-empty"></span>
+      </span>
+      <span class="tab tab-soon">
+        <span class="tab-name">기업체 5</span>
+        <span class="tab-logo tab-logo-empty"></span>
+      </span>
+      <span class="tab tab-soon">
+        <span class="tab-name">기업체 6</span>
+        <span class="tab-logo tab-logo-empty"></span>
+      </span>
+      <span class="tab tab-soon">
+        <span class="tab-name">기업체 7</span>
+        <span class="tab-logo tab-logo-empty"></span>
+      </span>
+      <span class="tab tab-soon">
+        <span class="tab-name">기업체 8</span>
+        <span class="tab-logo tab-logo-empty"></span>
+      </span>
+    </nav>
+    <p class="version">Version 1</p>
+  </main>
+
+  <script>
+    const logo = document.getElementById("schoolLogo");
+    const logoWrap = document.getElementById("logoWrap");
+
+    function showLogoFallback() {
+      logoWrap.classList.add("is-missing");
+    }
+
+    logo.addEventListener("error", showLogoFallback);
+    if (logo.complete && logo.naturalWidth === 0) {
+      showLogoFallback();
+    }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"></script>
+  <script>
+    (function () {
+      const wrap = document.getElementById("logoWrap");
+      const title = document.querySelector(".hero h1");
+      const line = document.querySelector(".hero .gold-line");
+      const sub = document.querySelector(".hero .subtitle");
+      if (!wrap) return;
+
+      if (typeof anime === "undefined" || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        wrap.style.opacity = "1";
+        return;
+      }
+
+      anime.set(wrap, { opacity: 0, scale: 0.35, rotate: -48 });
+      anime.set([title, line, sub], { opacity: 0, translateY: 28 });
+
+      const motion = anime.timeline({ easing: "easeOutCubic" })
+        .add({
+          targets: wrap,
+          opacity: [0, 1],
+          scale: [0.35, 1.18],
+          rotate: [-48, 8],
+          duration: 1100
+        })
+        .add({
+          targets: wrap,
+          scale: 1,
+          rotate: 0,
+          duration: 620,
+          easing: "easeOutQuad"
+        }, "-=180")
+        .add({
+          targets: [title, line, sub],
+          opacity: [0, 1],
+          translateY: [28, 0],
+          delay: anime.stagger(90),
+          duration: 700,
+          easing: "easeOutQuad"
+        }, "-=420");
+
+      motion.finished.then(function () {
+        anime({
+          targets: wrap,
+          scale: [1, 1.08, 1],
+          rotate: [0, 6, 0, -6, 0],
+          duration: 5200,
+          easing: "easeInOutSine",
+          loop: true
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

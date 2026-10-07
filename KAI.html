@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>한국항공우주산업(KAI) · 대/공기업반 자료</title>
+  <meta name="version" content="1">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="page">
+    <a class="back-link" href="index.html">메인으로</a>
+    <section class="panel">
+      <div class="company-head">
+        <div class="logo-wrap has-logo" id="companyLogo">
+          <img src="logos/kai.png" alt="한국항공우주산업(KAI) 로고">
+          <span class="logo-shine" aria-hidden="true"></span>
+        </div>
+      </div>
+
+      <section class="section">
+        <h3>입사에 필요한 내용</h3>
+        <div class="requirement-grid">
+          <div class="slot slot-split">
+            <div class="slot-part">
+              <span class="slot-label">자격증</span>
+              <p>기능사 및 산업기사 2종(최고 기준 2개 자격증 인정)</p>
+            </div>
+            <div class="slot-part">
+              <span class="slot-label">가산점</span>
+              <p>준비 중</p>
+            </div>
+          </div>
+          <div class="slot">
+            <span class="slot-label">전형방법(일정)</span>
+            <p>준비 중</p>
+          </div>
+          <div class="slot slot-wide">
+            <span class="slot-label">조건</span>
+            <p>추천자격 : 아래 5가지 자격에 모두 해당 시 추천 가능
+
+1) 학력 : 추천 학교 관련 학과(기계, 전기전자, 항공, 자동화 설비/장비, 로봇 관련)에 재학 중인 직업계고 3학년으로서 학교장 추천을 받은 자(※2027년 2월 졸업 가능자)
+2) 성적 : 3학년 1학기까지 국·영·수 평균 3등급 &amp; 전과목 평균 3등급 이내
+3) 출결 : 미인정 출결 3회 이하
+4) 자격증 : 관련 학과 기능사 이상 자격증 최소 2개 이상
+- 「국가기술자격법 시행규칙」 [별표2] 대직무분야 중 기계(16), 재료(17), 전기·전자(20)
+5) 기타 : 2026년 직업공통능력 인증진단 응시자(2026년 직업기초능력평가 응시자)</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h3>우리 학교 합격생</h3>
+        <div class="student-grid">
+          <a class="student-card" href="KAI/합격생1.html">
+            <strong>정O건</strong>
+            <span>마이스터 13기 / AI자동화과</span>
+            <div class="student-photo">사진</div>
+          </a>
+          <a class="student-card" href="KAI/합격생2.html">
+            <strong>합격생 2</strong>
+            <span>기수 / 학과</span>
+            <div class="student-photo">사진</div>
+          </a>
+          <a class="student-card" href="KAI/합격생3.html">
+            <strong>합격생 3</strong>
+            <span>기수 / 학과</span>
+            <div class="student-photo">사진</div>
+          </a>
+          <a class="student-card" href="KAI/합격생4.html">
+            <strong>합격생 4</strong>
+            <span>기수 / 학과</span>
+            <div class="student-photo">사진</div>
+          </a>
+        </div>
+      </section>
+    </section>
+    <p class="version">Version 1</p>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"></script>
+  <script>
+    (function () {
+      const logo = document.getElementById("companyLogo");
+      if (!logo) return;
+
+      if (typeof anime === "undefined" || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        logo.style.opacity = "1";
+        return;
+      }
+
+      anime.set(logo, {
+        opacity: 0,
+        scale: 0.28,
+        rotate: -12,
+        translateY: 40,
+        filter: "blur(18px) brightness(0.25) saturate(0.5)"
+      });
+
+      const motion = anime.timeline({ easing: "easeOutExpo" })
+        .add({
+          targets: logo,
+          opacity: [0, 1],
+          scale: [0.28, 1.2],
+          rotate: [-12, 4],
+          translateY: [40, -8],
+          filter: [
+            "blur(18px) brightness(0.25) saturate(0.5)",
+            "blur(0px) brightness(1.4) saturate(1.2)"
+          ],
+          duration: 900
+        })
+        .add({
+          targets: logo,
+          scale: 1,
+          rotate: 0,
+          translateY: 0,
+          filter: "blur(0px) brightness(1) saturate(1)",
+          boxShadow: [
+            "0 0 0 rgba(196,165,116,0)",
+            "0 0 72px rgba(196,165,116,0.8)",
+            "0 0 20px rgba(196,165,116,0.25)"
+          ],
+          duration: 560,
+          easing: "easeOutCubic"
+        }, "-=160")
+        .add({
+          targets: ".logo-shine",
+          translateX: ["-140%", "180%"],
+          duration: 640,
+          easing: "easeInOutQuart"
+        }, "-=820")
+        .add({
+          targets: ".logo-shine",
+          translateX: ["-140%", "180%"],
+          duration: 480,
+          easing: "easeInOutCubic"
+        }, "-=80");
+
+      motion.finished.then(function () {
+        anime({
+          targets: logo,
+          scale: [1, 1.06, 1],
+          translateY: [0, -10, 0],
+          duration: 4800,
+          easing: "easeInOutSine",
+          loop: true
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
