@@ -5,55 +5,71 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>부산자동차마이스터고등학교 대/공기업반 자료</title>
   <meta name="version" content="1">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=5">
 </head>
 <body>
   <a class="corner-link" href="https://jonggeon94.github.io/Interview/" target="_blank" rel="noopener noreferrer">면접 자료</a>
   <main class="page">
-    <header class="hero">
-      <div class="logo-wrap" id="logoWrap">
-        <img id="schoolLogo" src="logo.png" alt="부산자동차마이스터고등학교 로고">
-        <div class="logo-fallback">학교 로고</div>
-      </div>
-      <h1>대/공기업반 자료</h1>
-      <div class="gold-line"></div>
-      <p class="subtitle">기업체를 선택하면 해당 자료 페이지로 이동합니다.</p>
-    </header>
+    <div class="bento home-bento">
+      <header class="hero">
+        <div class="logo-wrap" id="logoWrap">
+          <img id="schoolLogo" src="logo.png" alt="부산자동차마이스터고등학교 로고">
+          <div class="logo-fallback">학교 로고</div>
+        </div>
+        <div class="hero-text">
+          <h1>대/공기업반 자료</h1>
+          <div class="gold-line"></div>
+          <p class="subtitle">부산자동차마이스터고등학교</p>
+        </div>
+      </header>
 
-    <nav class="tabs" aria-label="기업체">
-      <a class="tab" href="KAI.html">
-        <span class="tab-name">한국항공우주산업(KAI)</span>
-        <span class="tab-logo"><img src="logos/kai.png" alt=""></span>
-      </a>
-      <span class="tab tab-soon">
-        <span class="tab-name">기업체 2</span>
-        <span class="tab-logo tab-logo-empty"></span>
-      </span>
-      <span class="tab tab-soon">
-        <span class="tab-name">기업체 3</span>
-        <span class="tab-logo tab-logo-empty"></span>
-      </span>
-      <span class="tab tab-soon">
-        <span class="tab-name">기업체 4</span>
-        <span class="tab-logo tab-logo-empty"></span>
-      </span>
-      <span class="tab tab-soon">
-        <span class="tab-name">기업체 5</span>
-        <span class="tab-logo tab-logo-empty"></span>
-      </span>
-      <span class="tab tab-soon">
-        <span class="tab-name">기업체 6</span>
-        <span class="tab-logo tab-logo-empty"></span>
-      </span>
-      <span class="tab tab-soon">
-        <span class="tab-name">기업체 7</span>
-        <span class="tab-logo tab-logo-empty"></span>
-      </span>
-      <span class="tab tab-soon">
-        <span class="tab-name">기업체 8</span>
-        <span class="tab-logo tab-logo-empty"></span>
-      </span>
-    </nav>
+      <nav class="tabs" aria-label="기업체">
+        <a class="tab" href="KAI.html">
+          <span class="tab-logo"><img src="logos/kai.png" alt=""></span>
+          <span class="tab-name">한국항공우주산업(KAI)</span>
+          <span class="tab-arrow" aria-hidden="true">→</span>
+        </a>
+        <span class="tab tab-soon">
+          <span class="tab-logo tab-logo-empty">준비 중</span>
+          <span class="tab-name">기업체 2</span>
+        </span>
+        <span class="tab tab-soon">
+          <span class="tab-logo tab-logo-empty">준비 중</span>
+          <span class="tab-name">기업체 3</span>
+        </span>
+        <span class="tab tab-soon">
+          <span class="tab-logo tab-logo-empty">준비 중</span>
+          <span class="tab-name">기업체 4</span>
+        </span>
+        <span class="tab tab-soon">
+          <span class="tab-logo tab-logo-empty">준비 중</span>
+          <span class="tab-name">기업체 5</span>
+        </span>
+        <span class="tab tab-soon">
+          <span class="tab-logo tab-logo-empty">준비 중</span>
+          <span class="tab-name">기업체 6</span>
+        </span>
+        <span class="tab tab-soon">
+          <span class="tab-logo tab-logo-empty">준비 중</span>
+          <span class="tab-name">기업체 7</span>
+        </span>
+        <span class="tab tab-soon">
+          <span class="tab-logo tab-logo-empty">준비 중</span>
+          <span class="tab-name">기업체 8</span>
+        </span>
+      </nav>
+
+      <section class="tile stat-tile">
+        <span class="tile-eyebrow">등록된 기업</span>
+        <p class="stat-num"><strong id="statDone">0</strong> / <span id="statTotal">0</span></p>
+        <div class="stat-bar"><span id="statBar"></span></div>
+      </section>
+
+      <section class="tile guide-tile">
+        <span class="tile-eyebrow">이용 방법</span>
+        <p>기업체를 선택하면 자격증 · 전형 일정 · 지원 조건과<br>우리 학교 합격생 후기를 볼 수 있어요.</p>
+      </section>
+    </div>
     <p class="version">Version 1</p>
   </main>
 
@@ -69,6 +85,12 @@
     if (logo.complete && logo.naturalWidth === 0) {
       showLogoFallback();
     }
+
+    const total = document.querySelectorAll(".tabs .tab").length;
+    const done = document.querySelectorAll(".tabs a.tab").length;
+    document.getElementById("statDone").textContent = done;
+    document.getElementById("statTotal").textContent = total;
+    document.getElementById("statBar").style.width = (total ? (done / total) * 100 : 0) + "%";
   </script>
   <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"></script>
   <script>
