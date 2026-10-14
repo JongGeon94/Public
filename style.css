@@ -297,7 +297,7 @@ a.tab {
 }
 
 .tab-logo img {
-  height: 64px;
+  height: 88px;
   max-width: 260px;
   object-fit: contain;
   transition: transform 0.6s var(--ease);
@@ -337,6 +337,16 @@ a.tab:hover .tab-more {
   background: #0077ed;
 }
 
+a.tab.is-light {
+  background: var(--gray);
+  color: var(--ink);
+}
+
+.tab-soon {
+  background: #fafafc;
+  box-shadow: inset 0 0 0 1px #e8e8ed;
+}
+
 .tab-soon .tab-name {
   color: #aeaeb2;
 }
@@ -358,6 +368,7 @@ a.tab:hover .tab-more {
   width: min(680px, 100%);
   height: clamp(110px, 17vw, 190px);
   margin-bottom: 36px;
+  grid-template: 100% / 100%;
 }
 
 .logo-shine {
@@ -393,6 +404,33 @@ a.tab:hover .tab-more {
 .company-hero .btn-outline:hover {
   background: var(--blue-dark);
   color: #000;
+}
+
+.company-hero.is-light {
+  background: var(--gray);
+  color: var(--ink);
+}
+
+.company-hero.is-light .logo-wrap.has-logo {
+  height: clamp(80px, 11vw, 130px);
+}
+
+.company-hero.is-light h1 {
+  color: var(--ink);
+}
+
+.company-hero.is-light .subtitle {
+  color: var(--muted);
+}
+
+.company-hero.is-light .btn-outline {
+  color: var(--blue);
+  box-shadow: inset 0 0 0 1px var(--blue);
+}
+
+.company-hero.is-light .btn-outline:hover {
+  background: var(--blue);
+  color: #fff;
 }
 
 .requirement-grid,
