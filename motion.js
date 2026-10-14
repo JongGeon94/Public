@@ -57,12 +57,13 @@
     }, heroLogo ? "-=800" : 0);
   }
 
-  const heroRest = document.querySelectorAll(".hero .subtitle");
+  const heroRest = document.querySelectorAll(".hero .subtitle, .hero .actions");
   if (heroRest.length) {
     intro.add({
       targets: heroRest,
       opacity: [0, 1],
       translateY: [16, 0],
+      delay: anime.stagger(120),
       duration: 900
     }, "-=700");
   }
@@ -80,7 +81,13 @@
       translateX: ["-140%", "300%"],
       duration: 900,
       easing: "easeInOutQuart"
-    }, "-=700");
+    }, "-=700").add({
+      targets: ".company-hero h1, .company-hero .subtitle, .company-hero .actions",
+      opacity: [0, 1],
+      translateY: [24, 0],
+      delay: anime.stagger(120),
+      duration: 1000
+    }, "-=900");
   }
 
   const revealSelector = [
