@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>한국항공우주산업(KAI) · 대/공기업반 자료</title>
-  <meta name="version" content="2">
-  <link rel="stylesheet" href="style.css?v=18">
+  <meta name="version" content="3">
+  <link rel="stylesheet" href="style.css?v=25">
   <script>document.documentElement.classList.add("motion");setTimeout(function(){if(!window.__motionReady)document.documentElement.classList.remove("motion")},2500);</script>
 </head>
 <body>
@@ -28,6 +28,7 @@
         <p class="subtitle">우리 학교 선배들의 KAI 합격 정보.</p>
         <div class="actions">
           <a class="btn" href="#requirements">입사 조건 보기</a>
+          <button class="btn btn-outline" type="button" data-open-self-check>자가진단 해보기</button>
           <a class="btn btn-outline" href="#students">합격생 후기</a>
         </div>
       </div>
@@ -91,6 +92,35 @@
         </div>
       </section>
 
+      <dialog class="modal" id="selfCheckModal" aria-labelledby="selfCheckTitle" data-core-max="3" data-all-max="3">
+        <div class="modal-head">
+          <h3 id="selfCheckTitle">자가진단</h3>
+          <button class="modal-close" type="button" aria-label="닫기" data-close-self-check>&times;</button>
+        </div>
+        <span class="slot-note">※ 작년 기준이므로 해마다 바뀔 수 있음. 참고 바람</span>
+        <p class="modal-desc">1학년 1학기부터 3학년 1학기까지 등급을 골라 주세요. 듣지 않은 학기는 '없음'을 고르면 평균에서 빠져요.</p>
+        <div class="grade-table-wrap">
+          <table class="grade-table">
+            <thead>
+              <tr>
+                <th scope="col">과목</th>
+                <th scope="col">1학년<br>1학기</th>
+                <th scope="col">1학년<br>2학기</th>
+                <th scope="col">2학년<br>1학기</th>
+                <th scope="col">2학년<br>2학기</th>
+                <th scope="col">3학년<br>1학기</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <button class="grade-add" type="button" data-add-subject>+ 과목 추가</button>
+        <div class="modal-foot">
+          <button class="btn" type="button" data-run-self-check>확인하기</button>
+        </div>
+        <div class="check-result" aria-live="polite" hidden></div>
+      </dialog>
+
       <section class="section" id="students">
         <h2 class="section-title">우리 학교 합격생.</h2>
         <div class="student-grid">
@@ -117,8 +147,9 @@
         </div>
       </section>
     </section>
-    <p class="version">Version 2</p>
+    <p class="version">Version 3</p>
   </main>
+  <script src="self-check.js?v=8"></script>
   <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"></script>
   <script src="motion.js"></script>
 </body>

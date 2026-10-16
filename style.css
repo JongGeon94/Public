@@ -768,6 +768,316 @@ a.student-card:hover::after {
   background: transparent;
 }
 
+/* ---------- 자가진단 ---------- */
+
+button.btn {
+  border: 0;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.modal {
+  width: min(100% - 32px, 760px);
+  max-height: calc(100vh - 48px);
+  padding: 32px;
+  border: 0;
+  border-radius: var(--radius);
+  background: var(--bg);
+  color: var(--ink);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.24);
+}
+
+.modal::backdrop {
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(4px);
+}
+
+.modal[open] {
+  animation: modal-in 0.35s var(--ease);
+}
+
+@keyframes modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+  }
+}
+
+.modal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.modal-head h3 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.modal-close {
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--gray);
+  color: var(--muted);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.modal-close:hover {
+  background: var(--gray-hover);
+  color: var(--ink);
+}
+
+.modal-desc {
+  margin: 12px 0 0;
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.grade-table-wrap {
+  margin-top: 16px;
+  overflow-x: auto;
+  border-radius: 12px;
+  background: var(--gray);
+}
+
+.grade-table {
+  width: 100%;
+  min-width: 560px;
+  border-collapse: collapse;
+}
+
+.grade-table th,
+.grade-table td {
+  padding: 6px;
+  text-align: center;
+}
+
+.grade-table thead th {
+  padding: 12px 6px 8px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.grade-table tbody th {
+  width: 120px;
+  padding-left: 14px;
+  color: var(--ink);
+  font-size: 15px;
+  font-weight: 600;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.grade-table tbody tr + tr {
+  border-top: 1px solid #e8e8ed;
+}
+
+.grade-select,
+.rank-input {
+  width: 100%;
+  min-width: 0;
+  padding: 8px 4px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--ink);
+  font: inherit;
+  font-size: 16px;
+  text-align: center;
+  text-align-last: center;
+  cursor: pointer;
+}
+
+.grade-select.is-none {
+  border-color: transparent;
+  background: var(--gray-hover);
+  color: var(--faint);
+  font-size: 14px;
+}
+
+.rank-input {
+  cursor: text;
+}
+
+.rank-table {
+  min-width: 0;
+}
+
+.rank-table tbody th {
+  width: auto;
+}
+
+.grade-select.is-empty,
+.rank-input.is-empty {
+  border-color: #e5484d;
+  background: #fff5f5;
+}
+
+.grade-select:focus,
+.grade-table input:focus {
+  outline: none;
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.2);
+}
+
+.grade-name-cell {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.grade-table input.grade-name {
+  width: 100%;
+  min-width: 0;
+  padding: 4px 0;
+  border: 0;
+  border-bottom: 1px dashed var(--line);
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.grade-table input.grade-name:focus {
+  border-bottom-color: var(--blue);
+  box-shadow: none;
+}
+
+.grade-remove {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--gray-hover);
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.grade-remove:hover {
+  background: var(--line);
+  color: var(--ink);
+}
+
+.grade-add {
+  width: 100%;
+  margin-top: 12px;
+  padding: 14px;
+  border: 1px dashed var(--line);
+  border-radius: 12px;
+  background: transparent;
+  color: var(--blue-text);
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.grade-add:hover {
+  border-color: var(--blue);
+  background: rgba(0, 113, 227, 0.04);
+}
+
+.modal-foot {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.check-result {
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 12px;
+  background: var(--gray);
+}
+
+.check-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  padding: 10px 0;
+}
+
+.check-row + .check-row {
+  border-top: 1px solid #e8e8ed;
+}
+
+.check-row span {
+  flex: 1;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.check-row strong {
+  font-size: 17px;
+}
+
+.check-row em {
+  padding: 4px 10px;
+  border-radius: 980px;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 600;
+}
+
+.is-ok {
+  background: #e3f6e8;
+  color: #1a7f37;
+}
+
+.is-no {
+  background: #fde8e8;
+  color: #c62828;
+}
+
+.check-summary {
+  margin: 12px 0 0;
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.check-caution {
+  margin: 12px 0 0;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: #fff8e6;
+  color: #8a5a00;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+.check-note,
+.check-warn {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.check-warn {
+  margin: 0;
+  color: #c62828;
+  font-size: 15px;
+  font-weight: 600;
+}
+
 .story .slot-label {
   margin-bottom: 8px;
   color: var(--blue-text);
@@ -895,6 +1205,10 @@ a.student-card:hover::after {
 
   .student-grid {
     gap: 12px;
+  }
+
+  .modal {
+    padding: 24px;
   }
 
   .student-head .student-photo {
