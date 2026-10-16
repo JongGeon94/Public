@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>부산자동차마이스터고등학교 대/공기업반 자료</title>
   <meta name="version" content="3">
-  <link rel="stylesheet" href="style.css?v=18">
+  <link rel="stylesheet" href="style.css?v=26">
   <script>document.documentElement.classList.add("motion");setTimeout(function(){if(!window.__motionReady)document.documentElement.classList.remove("motion")},2500);</script>
 </head>
 <body>
@@ -69,6 +69,14 @@
     <p class="version">Version 3</p>
   </main>
 
+  <div class="toast" id="updateToast" role="status" aria-live="polite">
+    <div class="toast-body">
+      <strong>Version 3 Update : 자가진단</strong>
+      <span>기업체 페이지에서 '자가진단 해보기'를 눌러 보세요.</span>
+    </div>
+    <button class="toast-close" type="button" aria-label="알림 닫기">&times;</button>
+  </div>
+
   <script>
     const logo = document.getElementById("schoolLogo");
     const logoWrap = document.getElementById("logoWrap");
@@ -81,6 +89,14 @@
     if (logo.complete && logo.naturalWidth === 0) {
       showLogoFallback();
     }
+
+    const toast = document.getElementById("updateToast");
+    function hideToast() {
+      toast.classList.remove("is-open");
+    }
+    toast.querySelector(".toast-close").addEventListener("click", hideToast);
+    setTimeout(function () { toast.classList.add("is-open"); }, 600);
+    setTimeout(hideToast, 6600);
   </script>
   <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"></script>
   <script src="motion.js"></script>
