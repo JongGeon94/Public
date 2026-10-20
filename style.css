@@ -519,6 +519,62 @@ a.tab.is-light:hover {
   overflow-wrap: break-word;
 }
 
+.fact-rows,
+.score-rows {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fact-rows li {
+  display: grid;
+  grid-template-columns: 5.4em minmax(0, 1fr);
+  column-gap: 12px;
+  align-items: baseline;
+  padding: 9px 0;
+  border-top: 1px solid #e8e8ed;
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.fact-rows li:first-child {
+  border-top: 0;
+  padding-top: 2px;
+}
+
+.fact-rows b {
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.score-rows {
+  display: grid;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.score-rows li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: var(--gray);
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.score-rows b {
+  color: var(--blue-text);
+  font-size: 16px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
 .timeline-scroll {
   overflow-x: auto;
   margin-top: 24px;
@@ -533,6 +589,11 @@ a.tab.is-light:hover {
   margin: 0;
   padding: 0;
   list-style: none;
+}
+
+.timeline.is-layered {
+  grid-auto-columns: minmax(148px, 1fr);
+  min-width: 1240px;
 }
 
 .tl-item {
@@ -578,6 +639,13 @@ a.tab.is-light:hover {
   padding: 0 4px;
 }
 
+.timeline.is-layered .tl-body {
+  align-items: stretch;
+  gap: 6px;
+  padding: 0 8px;
+  text-align: center;
+}
+
 .tl-body span {
   order: 1;
   color: var(--ink);
@@ -599,6 +667,74 @@ a.tab.is-light:hover {
   color: var(--faint);
   font-size: 12.5px;
   font-style: normal;
+  line-height: 1.4;
+}
+
+.timeline.is-layered .tl-body span {
+  min-height: 2.8em;
+}
+
+.timeline.is-layered .tl-body strong {
+  min-height: 4.4em;
+}
+
+.timeline.is-layered .tl-body em {
+  min-height: 2.8em;
+}
+
+.cond-lead {
+  margin: 0 0 14px;
+}
+
+.cond-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: cond;
+}
+
+.cond-list li {
+  display: grid;
+  grid-template-columns: 2em 3.2em minmax(0, 1fr);
+  column-gap: 8px;
+  align-items: start;
+  font-size: 17px;
+  line-height: 1.8;
+}
+
+.cond-list li + li {
+  margin-top: 6px;
+}
+
+.cond-list li::before {
+  counter-increment: cond;
+  content: counter(cond) ")";
+  color: var(--blue-text);
+  font-weight: 600;
+}
+
+.cond-list b {
+  font-weight: 700;
+}
+
+.grade-table.is-letter {
+  min-width: 0;
+  table-layout: fixed;
+}
+
+.grade-table.is-letter tbody th {
+  width: auto;
+  white-space: normal;
+}
+
+.grade-table.is-letter thead th:first-child {
+  text-align: left;
+  padding-left: 14px;
+}
+
+.grade-table.is-letter thead th:last-child,
+.grade-table.is-letter td {
+  width: 132px;
 }
 
 .tl-item:not(.is-key) .tl-body span {
@@ -981,6 +1117,7 @@ button.btn {
 }
 
 .grade-select.is-empty,
+.grade-name.is-empty,
 .rank-input.is-empty {
   border-color: #e5484d;
   background: #fff5f5;

@@ -243,7 +243,111 @@
     };
   }
 
-  const runCheck = modal.dataset.mode === "rank" ? setupRanks() : setupGrades();
+  /* ---------- 전문교과 성취도 (한국철도공사) ---------- */
+
+  function setupLetters() {
+    const SCORES = { A: 1, B: 0, C: -1, D: -2, E: -3 };
+    const tbody = modal.querySelector(".grade-table tbody");
+
+    function letterSelect() {
+      const select = document.createElement("select");
+      select.className = "grade-select";
+      select.setAttribute("aria-label", "성취도");
+      [["", "-"], ["A", "A"], ["B", "B"], ["C", "C"], ["D", "D"], ["E", "E"]].forEach(function (pair) {
+        const option = document.createElement("option");
+        option.value = pair[0];
+        option.textContent = pair[1];
+        select.appendChild(option);
+      });
+      return select;
+    }
+
+    function addCourseRow() {
+      const row = document.createElement("tr");
+      row.className = "is-custom";
+
+      const th = document.createElement("th");
+      th.scope = "row";
+      const name = document.createElement("input");
+      name.type = "text";
+      name.className = "grade-name";
+      name.placeholder = "과목명";
+      name.setAttribute("aria-label", "과목명");
+
+      const remove = document.createElement("button");
+      remove.type = "button";
+      remove.className = "grade-remove";
+      remove.setAttribute("aria-label", "과목 삭제");
+      remove.textContent = "×";
+      remove.addEventListener("click", function () {
+        if (tbody.rows.length > 1) row.remove();
+        result.hidden = true;
+      });
+
+      const cell = document.createElement("div");
+      cell.className = "grade-name-cell";
+      cell.append(name, remove);
+      th.appendChild(cell);
+
+      const td = document.createElement("td");
+      td.appendChild(letterSelect());
+      row.append(th, td);
+      tbody.appendChild(row);
+    }
+
+    for (let i = 0; i < 4; i += 1) addCourseRow();
+
+    modal.querySelector("[data-add-subject]").addEventListener("click", function () {
+      addCourseRow();
+      tbody.rows[tbody.rows.length - 1].querySelector(".grade-name").focus();
+    });
+
+    tbody.addEventListener("input", function () { result.hidden = true; });
+    tbody.addEventListener("change", function () { result.hidden = true; });
+
+    return function () {
+      const rows = Array.from(tbody.rows);
+      const partial = [];
+      const courses = [];
+
+      rows.forEach(function (row) {
+        const name = row.querySelector(".grade-name");
+        const select = row.querySelector(".grade-select");
+        name.classList.remove("is-empty");
+        select.classList.remove("is-empty");
+        const hasName = name.value.trim() !== "";
+        const hasLetter = select.value !== "";
+        if (!hasName && !hasLetter) return;
+        if (!hasName || !hasLetter) {
+          if (!hasName) partial.push(name);
+          if (!hasLetter) partial.push(select);
+          return;
+        }
+        courses.push({ name: name.value.trim(), letter: select.value, score: SCORES[select.value] });
+      });
+
+      if (partial.length) {
+        partial.forEach(function (el) { el.classList.add("is-empty"); });
+        addNote("과목명과 성취도를 같이 입력해 주세요.", "check-warn");
+        return;
+      }
+
+      if (!courses.length) {
+        addNote("전문교과를 한 과목 이상 입력해 주세요.", "check-warn");
+        return;
+      }
+
+      const avg = average(courses.map(function (course) { return course.score; }));
+      courses.forEach(function (course) {
+        addNote(course.name + " " + course.letter + " (" + course.score + "점)");
+      });
+      addRow("전문교과 평균 (" + courses.length + "과목)", avg.toFixed(2) + "점", avg >= 0, "0점 이상");
+      addSummary(avg >= 0, "전문교과 평균 B 이상이에요.", "전문교과 평균이 B에 못 미쳐요.");
+      addNote("A=1, B=0, C=-1, D=-2, E=-3. 졸업예정자는 1학년 1학기부터 3학년 1학기까지 이수한 전문교과만 넣으세요. 대학 진학 여부는 따로 확인하세요.");
+    };
+  }
+
+  const runCheck = modal.dataset.mode === "rank" ? setupRanks() : modal.dataset.mode === "letter" ? setupLetters() : setupGrades();
 
   document.querySelector("[data-open-self-check]").addEventListener("click", function () {
     modal.showModal();
