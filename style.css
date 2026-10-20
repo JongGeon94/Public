@@ -836,6 +836,11 @@ a.student-card:hover::after {
   object-fit: cover;
 }
 
+.student-photo img.is-doc {
+  object-fit: contain;
+  background: #fff;
+}
+
 /* ---------- 합격생 페이지 ---------- */
 
 .student-head {
@@ -868,6 +873,23 @@ a.student-card:hover::after {
   height: 112px;
   background: var(--dark-2);
   color: var(--dark-muted);
+}
+
+.student-doc {
+  margin: 48px 0 0;
+}
+
+.student-doc img {
+  display: block;
+  width: 100%;
+  border-radius: 18px;
+}
+
+.student-doc figcaption {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 14px;
+  text-align: center;
 }
 
 .story {
