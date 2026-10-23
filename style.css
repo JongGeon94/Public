@@ -404,17 +404,16 @@ a.tab.is-light:hover {
 
 .hq-board {
   display: grid;
-  grid-template-columns: auto minmax(280px, 400px);
-  gap: 28px;
-  align-items: center;
-  justify-content: center;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
 }
 
 .hq-map {
-  width: min(88vw, 340px);
+  width: 100%;
   height: auto;
   aspect-ratio: 0.54;
-  justify-self: center;
+  justify-self: stretch;
   border-radius: 28px;
   overflow: hidden;
   background: #e8eaed;
@@ -1688,6 +1687,11 @@ button.btn {
   .hq-board {
     grid-template-columns: 1fr;
     gap: 16px;
+  }
+
+  .hq-map {
+    width: min(100%, 360px);
+    justify-self: center;
   }
 }
 
