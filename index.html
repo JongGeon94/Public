@@ -4,8 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>부산자동차마이스터고등학교 대/공기업반 자료</title>
-  <meta name="version" content="3">
-  <link rel="stylesheet" href="style.css?v=27">
+  <meta name="version" content="4">
+  <link rel="stylesheet" href="style.css?v=40">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.css">
   <script>document.documentElement.classList.add("motion");setTimeout(function(){if(!window.__motionReady)document.documentElement.classList.remove("motion")},2500);</script>
 </head>
 <body>
@@ -26,6 +27,7 @@
       <p class="subtitle">선배들의 합격 노하우를 한곳에.</p>
       <div class="actions">
         <a class="btn" href="#companies">기업체 보기</a>
+        <a class="btn btn-outline" href="#locations">본사 위치</a>
         <a class="btn btn-outline" href="https://jonggeon94.github.io/Interview/" target="_blank" rel="noopener noreferrer">면접 자료</a>
       </div>
     </header>
@@ -68,13 +70,67 @@
         <span class="tab-more">준비 중</span>
       </span>
     </nav>
-    <p class="version">Version 3</p>
+
+    <section class="hq" id="locations" aria-labelledby="hqTitle">
+      <h2 class="section-title" id="hqTitle">본사는 어디에.</h2>
+      <p class="hq-lead">우리 학교와 네 기업 본사입니다. 삼성디스플레이 근무지는 아산 캠퍼스예요.</p>
+      <div class="hq-board">
+        <div id="hqMap" class="hq-map" role="region" aria-label="본사 위치 지도"></div>
+        <div class="hq-side">
+          <button class="hq-reset" type="button" data-focus="all">전체 보기</button>
+          <ul class="hq-list">
+            <li class="hq-item">
+              <button type="button" data-focus="school">
+                <i class="hq-dot is-school" aria-hidden="true"></i>
+                <span><strong>우리 학교</strong><em>부산 사하구</em></span>
+              </button>
+            </li>
+            <li class="hq-item">
+              <button type="button" data-focus="kai">
+                <i class="hq-dot" aria-hidden="true"></i>
+                <span><strong>한국항공우주산업</strong><em>본사 · 경남 사천</em></span>
+              </button>
+              <a href="KAI.html">더 알아보기</a>
+            </li>
+            <li class="hq-item">
+              <button type="button" data-focus="sdc">
+                <i class="hq-dot" aria-hidden="true"></i>
+                <span><strong>삼성디스플레이</strong><em>본사 · 경기 용인 기흥</em></span>
+              </button>
+              <a href="SDC.html">더 알아보기</a>
+            </li>
+            <li class="hq-item">
+              <button type="button" data-focus="asan">
+                <i class="hq-dot is-work" aria-hidden="true"></i>
+                <span><strong>삼성디스플레이</strong><em>근무지 · 충남 아산</em></span>
+              </button>
+              <a href="SDC.html">더 알아보기</a>
+            </li>
+            <li class="hq-item">
+              <button type="button" data-focus="korail">
+                <i class="hq-dot" aria-hidden="true"></i>
+                <span><strong>한국철도공사</strong><em>본사 · 대전 동구</em></span>
+              </button>
+              <a href="KORAIL.html">더 알아보기</a>
+            </li>
+            <li class="hq-item">
+              <button type="button" data-focus="ts">
+                <i class="hq-dot" aria-hidden="true"></i>
+                <span><strong>한국교통안전공단</strong><em>본사 · 경북 김천</em></span>
+              </button>
+              <a href="TS.html">더 알아보기</a>
+            </li>
+          </ul>
+          <p class="hq-note">위치는 각 사 공개 본사 주소 기준입니다.</p>
+        </div>
+      </div>
+    </section>
+    <p class="version">Version 4</p>
   </main>
 
   <div class="toast" id="updateToast" role="status" aria-live="polite">
     <div class="toast-body">
-      <strong>Version 3 Update : 자가진단</strong>
-      <span>기업체 페이지에서 '자가진단 해보기'를 눌러 보세요.</span>
+      <strong>Version4 : 지도 업데이트</strong>
     </div>
     <button class="toast-close" type="button" aria-label="알림 닫기">&times;</button>
   </div>
@@ -99,6 +155,142 @@
     toast.querySelector(".toast-close").addEventListener("click", hideToast);
     setTimeout(function () { toast.classList.add("is-open"); }, 600);
     setTimeout(hideToast, 6600);
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+  <script>
+    (function () {
+      var places = [
+        { id: "school", short: "우리 학교", name: "우리 학교", area: "부산 사하구", address: "부산광역시 사하구 하신중앙로3번나길 16", lat: 35.0771314, lng: 128.9626312, kind: "school" },
+        { id: "kai", short: "KAI", name: "한국항공우주산업", area: "본사 · 경남 사천", address: "경상남도 사천시 사남면 공단1로 78", lat: 35.0750944, lng: 128.0613271, href: "KAI.html", kind: "hq" },
+        { id: "sdc", short: "삼성 본사", name: "삼성디스플레이", area: "본사 · 경기 용인 기흥", address: "경기도 용인시 기흥구 삼성로 1", lat: 37.2288151, lng: 127.0842349, href: "SDC.html", kind: "hq" },
+        { id: "asan", short: "삼성 아산", name: "삼성디스플레이", area: "근무지 · 충남 아산", address: "충청남도 아산시 탕정면 삼성로 181", lat: 36.8203947, lng: 127.0736571, href: "SDC.html", kind: "work" },
+        { id: "korail", short: "코레일", name: "한국철도공사", area: "본사 · 대전 동구", address: "대전광역시 동구 중앙로 240", lat: 36.3329434, lng: 127.4372445, href: "KORAIL.html", kind: "hq" },
+        { id: "ts", short: "TS", name: "한국교통안전공단", area: "본사 · 경북 김천", address: "경상북도 김천시 혁신6로 17", lat: 36.1246774, lng: 128.1836527, href: "TS.html", kind: "hq" }
+      ];
+
+      var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      var map = new maplibregl.Map({
+        container: "hqMap",
+        style: "https://tiles.openfreemap.org/styles/bright",
+        center: [127.8, 36.2],
+        zoom: 6,
+        minZoom: 4,
+        maxZoom: 12.5,
+        scrollZoom: false,
+        dragRotate: false,
+        pitchWithRotate: false,
+        touchPitch: false,
+        attributionControl: true
+      });
+      map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-right");
+      map.touchZoomRotate.disableRotation();
+
+      function useKoreanNames() {
+        var name = ["coalesce", ["get", "name:nonlatin"], ["get", "name"]];
+        ["label_city", "label_city_capital", "label_town", "label_village", "label_state", "label_other", "water_name_point_label", "water_name_line_label", "waterway_line_label"].forEach(function (id) {
+          if (map.getLayer(id)) map.setLayoutProperty(id, "text-field", name);
+        });
+        ["label_country_1", "label_country_2", "label_country_3", "label_village"].forEach(function (id) {
+          if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", "none");
+        });
+      }
+
+      var markers = {};
+      places.forEach(function (place) {
+        var link = place.href ? '<a href="' + place.href + '">더 알아보기</a>' : "";
+        var el = document.createElement("button");
+        el.type = "button";
+        el.className = "pin-icon";
+        el.title = place.name + " " + place.area;
+        el.innerHTML = '<span class="pin-mark is-' + place.kind + '"><span>' + place.short + "</span><i></i></span>";
+        var popup = new maplibregl.Popup({ offset: 18, closeButton: true, maxWidth: "240px", focusAfterOpen: false })
+          .setHTML('<div class="pin-popup"><strong>' + place.name + "</strong><span>" + place.area + "</span><em>" + place.address + "</em>" + link + "</div>");
+        var marker = new maplibregl.Marker({ element: el, anchor: "bottom" })
+          .setLngLat([place.lng, place.lat])
+          .setPopup(popup)
+          .addTo(map);
+        el.addEventListener("click", function () { focusPlace(place.id); });
+        markers[place.id] = marker;
+      });
+
+      var korea = new maplibregl.LngLatBounds([125.95, 33.1], [129.58, 38.62]);
+      map.setMaxBounds([[124.6, 32.5], [130.6, 39.3]]);
+
+      function glide(t) {
+        return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+      }
+
+      var flight = 0;
+
+      function setActive(id) {
+        document.querySelectorAll(".hq-item").forEach(function (item) {
+          item.classList.toggle("is-active", item.querySelector("[data-focus]") && item.querySelector("[data-focus]").getAttribute("data-focus") === id);
+        });
+        Object.keys(markers).forEach(function (key) {
+          markers[key].getElement().classList.toggle("is-focus", key === id);
+        });
+      }
+
+      function closePopups() {
+        Object.keys(markers).forEach(function (key) {
+          var popup = markers[key].getPopup();
+          if (popup && popup.isOpen()) popup.remove();
+        });
+      }
+
+      function showAll() {
+        var ticket = ++flight;
+        setActive("");
+        closePopups();
+        map.setMinZoom(4);
+        map.resize();
+        map.fitBounds(korea, {
+          padding: 18,
+          duration: reduce ? 0 : 1300,
+          easing: glide
+        });
+        map.once("moveend", function () {
+          if (ticket !== flight) return;
+          map.setMinZoom(map.getZoom());
+        });
+      }
+
+      function focusPlace(id) {
+        var place = places.filter(function (item) { return item.id === id; })[0];
+        if (!place) return;
+        var ticket = ++flight;
+        setActive(id);
+        closePopups();
+        map.easeTo({
+          center: [place.lng, place.lat],
+          zoom: 10.4,
+          duration: reduce ? 0 : 1700,
+          easing: glide,
+          essential: true
+        });
+        map.once("moveend", function () {
+          if (ticket !== flight) return;
+          var popup = markers[id].getPopup();
+          if (popup && !popup.isOpen()) markers[id].togglePopup();
+        });
+      }
+
+      document.querySelectorAll("[data-focus]").forEach(function (button) {
+        button.addEventListener("click", function () {
+          var id = button.getAttribute("data-focus");
+          if (id === "all") showAll();
+          else focusPlace(id);
+        });
+      });
+
+      map.on("load", function () {
+        useKoreanNames();
+        showAll();
+      });
+      if (window.ResizeObserver) {
+        new ResizeObserver(function () { map.resize(); }).observe(document.getElementById("hqMap"));
+      }
+    })();
   </script>
   <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"></script>
   <script src="motion.js"></script>
