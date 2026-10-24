@@ -53,10 +53,11 @@
         <span class="tab-name">한국교통안전공단(TS)</span>
         <span class="tab-more">더 알아보기</span>
       </a>
-      <span class="tab tab-soon">
-        <span class="tab-name">기업체 5</span>
-        <span class="tab-more">준비 중</span>
-      </span>
+      <a class="tab is-light" href="KPS.html">
+        <span class="tab-logo"><img src="logos/kps.png?v=1" alt=""></span>
+        <span class="tab-name">한전KPS</span>
+        <span class="tab-more">더 알아보기</span>
+      </a>
       <span class="tab tab-soon">
         <span class="tab-name">기업체 6</span>
         <span class="tab-more">준비 중</span>
@@ -73,7 +74,7 @@
 
     <section class="hq" id="locations" aria-labelledby="hqTitle">
       <h2 class="section-title" id="hqTitle">본사는 어디에.</h2>
-      <p class="hq-lead">우리 학교와 네 기업 본사입니다. 삼성디스플레이 근무지는 아산 캠퍼스예요.</p>
+      <p class="hq-lead">우리 학교와 다섯 기업 본사입니다. 삼성디스플레이 근무지는 아산 캠퍼스예요.</p>
       <div class="hq-board">
         <div id="hqMap" class="hq-map" role="region" aria-label="본사 위치 지도"></div>
         <div class="hq-side">
@@ -121,6 +122,13 @@
               </button>
               <a href="TS.html">더 알아보기</a>
             </li>
+            <li class="hq-item">
+              <button type="button" data-focus="kps">
+                <i class="hq-dot" aria-hidden="true"></i>
+                <span><strong>한전KPS</strong><em>본사 · 전남 나주</em></span>
+              </button>
+              <a href="KPS.html">더 알아보기</a>
+            </li>
           </ul>
           <p class="hq-note">위치는 각 사 공개 본사 주소 기준입니다.</p>
         </div>
@@ -166,7 +174,8 @@
         { id: "sdc", short: "삼성 본사", name: "삼성디스플레이", area: "본사 · 경기 용인 기흥", address: "경기도 용인시 기흥구 삼성로 1", lat: 37.2288151, lng: 127.0842349, href: "SDC.html", kind: "hq" },
         { id: "asan", short: "삼성 아산", name: "삼성디스플레이", area: "근무지 · 충남 아산", address: "충청남도 아산시 탕정면 삼성로 181", lat: 36.8203947, lng: 127.0736571, href: "SDC.html", kind: "work" },
         { id: "korail", short: "코레일", name: "한국철도공사", area: "본사 · 대전 동구", address: "대전광역시 동구 중앙로 240", lat: 36.3329434, lng: 127.4372445, href: "KORAIL.html", kind: "hq" },
-        { id: "ts", short: "TS", name: "한국교통안전공단", area: "본사 · 경북 김천", address: "경상북도 김천시 혁신6로 17", lat: 36.1246774, lng: 128.1836527, href: "TS.html", kind: "hq" }
+        { id: "ts", short: "TS", name: "한국교통안전공단", area: "본사 · 경북 김천", address: "경상북도 김천시 혁신6로 17", lat: 36.1246774, lng: 128.1836527, href: "TS.html", kind: "hq" },
+        { id: "kps", short: "KPS", name: "한전KPS", area: "본사 · 전남 나주", address: "전라남도 나주시 문화로 211", lat: 35.0176983, lng: 126.783251, href: "KPS.html", kind: "hq" }
       ];
 
       var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
