@@ -260,9 +260,9 @@ body {
 }
 
 .hero .logo-wrap {
-  width: 96px;
-  height: 96px;
-  margin-bottom: 28px;
+  width: clamp(148px, 16vw, 196px);
+  height: clamp(148px, 16vw, 196px);
+  margin-bottom: 40px;
   border-radius: 50%;
   background: #fff;
 }
