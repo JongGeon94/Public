@@ -1172,6 +1172,12 @@ a.student-card:hover::after {
   line-height: 1.3;
 }
 
+.student-head .student-company img.logo-chip {
+  background: #fff;
+  border-radius: 6px;
+  padding: 4px 8px;
+}
+
 .student-grid.is-three {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
@@ -1714,6 +1720,24 @@ button.btn {
   font-weight: 700;
   letter-spacing: -0.035em;
   line-height: 1.35;
+}
+
+.story .section.is-long {
+  text-align: left;
+}
+
+.story .section.is-long h3 {
+  text-align: center;
+}
+
+.story .section.is-long p {
+  max-width: 720px;
+  margin: 0 auto;
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.75;
+  text-align: left;
 }
 
 /* ---------- 등장 전 상태 (motion.js가 풀어줌) ---------- */
