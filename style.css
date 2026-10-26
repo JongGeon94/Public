@@ -267,6 +267,20 @@ body {
   background: #fff;
 }
 
+.hero .logo-marquee {
+  display: flex;
+  align-self: stretch;
+  width: 100vw;
+  margin: 0 calc(50% - 50vw) 36px;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.hero .logo-marquee .logo-row img {
+  height: 42px;
+}
+
 h1 {
   margin: 0;
   font-size: clamp(44px, 7.5vw, 80px);
@@ -776,6 +790,79 @@ button.pin-icon.is-focus .pin-mark {
 
 .company-hero.is-light .logo-wrap.has-logo {
   height: clamp(80px, 11vw, 130px);
+}
+
+.company-hero.is-light .logo-wrap.logo-marquee {
+  display: flex;
+  width: 100%;
+  height: auto;
+  margin-bottom: 28px;
+  overflow: hidden;
+  grid-template: none;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+}
+
+.logo-marquee .logo-row {
+  display: flex;
+  align-items: center;
+  flex: none;
+  gap: 72px;
+  padding-right: 72px;
+}
+
+.logo-marquee .logo-row img {
+  width: auto;
+  height: 34px;
+  max-width: none;
+  flex: none;
+}
+
+.student-card .student-where img.logo-on-dark,
+.logo-marquee .logo-row img.logo-on-dark {
+  background: #111;
+  border-radius: 6px;
+  padding: 4px 8px;
+  box-sizing: content-box;
+}
+
+.logo-marquee.is-on .logo-row {
+  animation-name: logo-pass;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.logo-marquee:hover .logo-row {
+  animation-play-state: paused;
+}
+
+@keyframes logo-pass {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
+
+@media (max-width: 640px) {
+  .logo-marquee .logo-row {
+    gap: 48px;
+    padding-right: 48px;
+  }
+
+  .logo-marquee .logo-row img {
+    height: 26px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-marquee {
+    justify-content: center;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .logo-marquee .logo-row {
+    padding-right: 0;
+    animation: none;
+  }
 }
 
 .company-hero.is-light h1 {

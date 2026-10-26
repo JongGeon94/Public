@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>졸업 이후 후기 · 대/공기업반 자료</title>
   <meta name="version" content="5">
-  <link rel="stylesheet" href="style.css?v=48">
+  <link rel="stylesheet" href="style.css?v=52">
   <script>document.documentElement.classList.add("motion");setTimeout(function(){if(!window.__motionReady)document.documentElement.classList.remove("motion")},2500);</script>
 </head>
 <body>
@@ -20,6 +20,16 @@
     <a class="back-link" href="index.html">메인으로</a>
     <section class="panel">
       <div class="company-hero is-light">
+        <div class="logo-wrap has-logo logo-marquee" id="companyLogo">
+          <!-- 회사를 추가할 때는 이 줄에 로고 img만 넣으면 됩니다. -->
+          <div class="logo-row">
+            <img src="logos/hyundai.png?v=1" alt="현대자동차">
+            <img src="logos/kia.png?v=1" alt="기아">
+            <img src="logos/hanwha-aerospace.png?v=1" alt="한화에어로스페이스">
+            <img class="logo-on-dark" src="logos/man.png?v=1" alt="만트럭">
+            <img src="logos/kolon.png?v=1" alt="코오롱">
+          </div>
+        </div>
         <h1>졸업 이후</h1>
         <p class="subtitle">학교를 졸업한 뒤 대기업·공기업에 간 선배들.</p>
       </div>
@@ -70,12 +80,62 @@
             <span class="student-where"><img src="logos/hyundai.png?v=1" alt="">현대자동차 · 남양연구소</span>
             <div class="student-photo"><img class="is-doc" src="졸업이후/kim-juncheol.jpg?v=1" alt=""></div>
           </a>
+          <a class="student-card" href="졸업이후/후기8.html">
+            <strong>김O원</strong>
+            <span>마이스터 5기 / 미래자동차정비과정</span>
+            <span class="student-where">BMP 모터스포츠</span>
+            <div class="student-photo">사진</div>
+          </a>
+          <a class="student-card" href="졸업이후/후기9.html">
+            <strong>서O웅</strong>
+            <span>마이스터 8기 / 미래자동차정비과정</span>
+            <span class="student-where"><img src="logos/hyundai.png?v=1" alt="">현대자동차</span>
+            <div class="student-photo"><img class="is-doc" src="졸업이후/seo-geonung.jpg?v=1" alt=""></div>
+          </a>
+          <a class="student-card" href="졸업이후/후기10.html">
+            <strong>윤O태</strong>
+            <span>마이스터 4기 / 미래자동차정비과정</span>
+            <span class="student-where"><img src="logos/kia.png?v=1" alt="">기아오토큐 · 남부점</span>
+            <div class="student-photo">사진</div>
+          </a>
+          <a class="student-card" href="졸업이후/후기11.html">
+            <strong>정O호</strong>
+            <span>마이스터 8기 / 미래자동차정비과정</span>
+            <span class="student-where"><img src="logos/hyundai.png?v=1" alt="">현대자동차 · 남양연구소</span>
+            <div class="student-photo">사진</div>
+          </a>
+          <a class="student-card" href="졸업이후/후기12.html">
+            <strong>박O수</strong>
+            <span>마이스터 7기 / 미래자동차정비과정</span>
+            <span class="student-where"><img class="logo-on-dark" src="logos/man.png?v=1" alt="">만트럭버스코리아</span>
+            <div class="student-photo">사진</div>
+          </a>
+          <a class="student-card" href="졸업이후/후기13.html">
+            <strong>서O석</strong>
+            <span>마이스터 2기 / 미래자동차정비과정</span>
+            <span class="student-where"><img src="logos/kolon.png?v=1" alt="">코오롱모터스 · 부산A/S</span>
+            <div class="student-photo"><img class="is-doc" src="졸업이후/seo-hoseok.jpg?v=1" alt=""></div>
+          </a>
         </div>
+        <script>
+          (function () {
+            var grid = document.currentScript.previousElementSibling;
+            if (!grid) return;
+            var cards = Array.prototype.slice.call(grid.children);
+            for (var i = cards.length - 1; i > 0; i--) {
+              var j = Math.floor(Math.random() * (i + 1));
+              var swap = cards[i];
+              cards[i] = cards[j];
+              cards[j] = swap;
+            }
+            cards.forEach(function (card) { grid.appendChild(card); });
+          })();
+        </script>
       </section>
     </section>
     <p class="version">Version 5</p>
   </main>
   <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"></script>
-  <script src="motion.js"></script>
+  <script src="motion.js?v=3"></script>
 </body>
 </html>

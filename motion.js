@@ -11,6 +11,66 @@
 
   window.__motionReady = true;
 
+  document.querySelectorAll(".logo-marquee").forEach(function (marquee) {
+    var row = marquee.querySelector(".logo-row");
+    if (!row) return;
+    var source = Array.prototype.map.call(row.querySelectorAll("img"), function (img) {
+      return img.cloneNode(true);
+    });
+    if (!source.length) return;
+
+    var timer = 0;
+
+    function layout() {
+      var copies = source.map(function (img) { return img.cloneNode(true); });
+      row.replaceChildren.apply(row, copies);
+      marquee.querySelectorAll(".logo-row.is-clone").forEach(function (node) {
+        node.remove();
+      });
+      marquee.classList.remove("is-on");
+      if (reduce) return;
+
+      var guard = 0;
+      while (row.scrollWidth < marquee.clientWidth && guard < 8) {
+        source.forEach(function (img) {
+          row.appendChild(img.cloneNode(true));
+        });
+        guard++;
+      }
+
+      var clone = row.cloneNode(true);
+      clone.classList.add("is-clone");
+      clone.setAttribute("aria-hidden", "true");
+      marquee.appendChild(clone);
+      var speed = marquee.closest(".hero") ? 20 : 42;
+      var seconds = Math.max(row.scrollWidth / speed, 16);
+      row.style.animationDuration = seconds + "s";
+      clone.style.animationDuration = seconds + "s";
+      marquee.classList.add("is-on");
+    }
+
+    function whenReady(done) {
+      var pending = source.length;
+      source.forEach(function (img) {
+        function finish() {
+          pending -= 1;
+          if (pending === 0) done();
+        }
+        if (img.complete) finish();
+        else {
+          img.addEventListener("load", finish);
+          img.addEventListener("error", finish);
+        }
+      });
+    }
+
+    whenReady(layout);
+    window.addEventListener("resize", function () {
+      window.clearTimeout(timer);
+      timer = window.setTimeout(layout, 180);
+    });
+  });
+
   if (typeof anime === "undefined" || reduce) {
     showAll();
     return;
@@ -76,12 +136,16 @@
       scale: [0.55, 1],
       filter: ["blur(24px) brightness(0.3)", "blur(0px) brightness(1)"],
       duration: 1600
-    }).add({
-      targets: ".logo-shine",
-      translateX: ["-140%", "300%"],
-      duration: 900,
-      easing: "easeInOutQuart"
-    }, "-=700").add({
+    });
+    if (companyLogo.querySelector(".logo-shine")) {
+      intro.add({
+        targets: ".logo-shine",
+        translateX: ["-140%", "300%"],
+        duration: 900,
+        easing: "easeInOutQuart"
+      }, "-=700");
+    }
+    intro.add({
       targets: ".company-hero h1, .company-hero .subtitle, .company-hero .actions",
       opacity: [0, 1],
       translateY: [24, 0],
